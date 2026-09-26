@@ -1,36 +1,134 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 💪 FITLOG — Workout Library
 
-## Getting Started
+FITLOG is a modern workout planning web application built with Next.js.
+It allows users to explore workouts, view detailed exercise information,
+create a daily workout plan, and save workouts for later.
 
-First, run the development server:
+## 🚀 Live Project
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Add your deployed project link here.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📌 Project Description
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+FITLOG is a dark-themed workout companion designed to help users organize
+their daily workouts.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Users can browse the workout library, sort exercises by duration, calories,
+or rating, view complete workout details, add exercises to today's plan,
+save workouts for later, and mark completed workouts as done.
 
-## Learn More
+## 🛠️ Technologies Used
 
-To learn more about Next.js, take a look at the following resources:
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+- Next.js App Router
+- React Context API
+- LocalStorage
+- JSON API / Workout Data
+- Vercel
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## ✨ Key Features
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 1. Workout Library
 
-## Deploy on Vercel
+Browse workouts covering different muscle groups with information such as:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Workout name
+- Muscle groups
+- Equipment
+- Duration
+- Calories
+- Rating
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 2. Workout Details
+
+Each workout has a dedicated details page containing:
+
+- Workout image
+- Description
+- Muscle groups
+- Equipment
+- Difficulty
+- Sets
+- Reps
+- Duration
+- Calories
+- Rating
+- Step-by-step instructions
+
+### 3. Today's Workout Plan
+
+Users can add workouts to today's plan.
+
+The plan supports a maximum of five workouts and shows:
+
+- Total exercises
+- Total minutes
+- Total calories
+
+### 4. Save Workouts for Later
+
+Users can save workouts they want to complete later.
+
+Saved workouts are available from the Saved tab on the My Plan page.
+
+### 5. Sort Workouts
+
+The workout library can be sorted by:
+
+- Duration
+- Calories
+- Rating
+
+### 6. Mark Workouts as Done
+
+Users can mark planned workouts as completed.
+
+A toast notification is displayed when a workout is marked as done.
+
+### 7. Remove Workouts
+
+Users can remove workouts from today's plan or saved workouts.
+
+A toast notification confirms the action.
+
+### 8. Persistent Data
+
+Today's Plan and Saved workouts are stored in LocalStorage,
+so the data remains available after refreshing the page.
+
+## 📱 Responsive Design
+
+FITLOG is designed to work across:
+
+- Mobile devices
+- Tablets
+- Desktop screens
+
+## 📂 Main Project Structure
+
+```text
+src/
+├── app/
+│   ├── my-plan/
+│   ├── workouts/
+│   │   └── [id]/
+│   ├── layout.tsx
+│   └── page.tsx
+│
+├── components/
+│   ├── homepage/
+│   │   └── Library.tsx
+│   │
+│   └── shared/
+│       ├── LibraryCard.tsx
+│       ├── Navbar.tsx
+│       └── Footer.tsx
+│
+├── context/
+│   └── PlanContext.tsx
+│
+└── types/
+    └── library.type.ts
