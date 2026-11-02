@@ -55,7 +55,7 @@ const Library = () => {
       className="bg-[#0b0d12] px-4 py-16 text-white"
     >
       <div className="mx-auto max-w-7xl">
-        {/* Heading + Sort */}
+       
         <div className="mb-8 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="mb-2 text-xs font-bold uppercase tracking-[0.25em] text-[#ccff00]">
@@ -71,7 +71,7 @@ const Library = () => {
             </p>
           </div>
 
-          {/* Sort Dropdown */}
+        
           <div className="relative">
             <label
               htmlFor="sort-workouts"
@@ -94,7 +94,7 @@ const Library = () => {
                 <option value="rating">Rating</option>
               </select>
 
-              {/* Chevron */}
+           
               <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-gray-400">
                 ↓
               </span>
@@ -102,7 +102,7 @@ const Library = () => {
           </div>
         </div>
 
-        {/* Loading */}
+        
         {loading ? (
           <div className="flex min-h-60 items-center justify-center">
             <div className="h-10 w-10 animate-spin rounded-full border-4 border-gray-700 border-t-[#ccff00]"></div>

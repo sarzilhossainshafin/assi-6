@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, {
@@ -35,35 +36,40 @@ export const PlanProvider = ({
 }) => {
   const [todayPlan, setTodayPlan] = useState<IData[]>([]);
   const [savedWorkouts, setSavedWorkouts] = useState<IData[]>([]);
-  const [completedWorkouts, setCompletedWorkouts] = useState<number[]>(
-    []
-  );
+  const [completedWorkouts, setCompletedWorkouts] = useState<number[]>([]);
 
   const [toastMessage, setToastMessage] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
 
+  // Load data from localStorage after mounting.
+  // This state restoration is intentional.
+  /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
-    const savedPlan = localStorage.getItem("todayPlan");
-    const savedLater = localStorage.getItem("savedWorkouts");
-    const savedCompleted = localStorage.getItem(
-      "completedWorkouts"
-    );
+    try {
+      const savedPlan = localStorage.getItem("todayPlan");
+      const savedLater = localStorage.getItem("savedWorkouts");
+      const savedCompleted = localStorage.getItem("completedWorkouts");
 
-    if (savedPlan) {
-      setTodayPlan(JSON.parse(savedPlan));
-    }
+      if (savedPlan) {
+        setTodayPlan(JSON.parse(savedPlan));
+      }
 
-    if (savedLater) {
-      setSavedWorkouts(JSON.parse(savedLater));
-    }
+      if (savedLater) {
+        setSavedWorkouts(JSON.parse(savedLater));
+      }
 
-    if (savedCompleted) {
-      setCompletedWorkouts(JSON.parse(savedCompleted));
+      if (savedCompleted) {
+        setCompletedWorkouts(JSON.parse(savedCompleted));
+      }
+    } catch (error) {
+      console.error("Failed to load workout data:", error);
     }
 
     setIsLoaded(true);
   }, []);
+  /* eslint-enable react-hooks/set-state-in-effect */
 
+  // Save today's plan
   useEffect(() => {
     if (!isLoaded) return;
 
@@ -73,6 +79,7 @@ export const PlanProvider = ({
     );
   }, [todayPlan, isLoaded]);
 
+  // Save later workouts
   useEffect(() => {
     if (!isLoaded) return;
 
@@ -82,6 +89,7 @@ export const PlanProvider = ({
     );
   }, [savedWorkouts, isLoaded]);
 
+  // Save completed workouts
   useEffect(() => {
     if (!isLoaded) return;
 
@@ -91,6 +99,7 @@ export const PlanProvider = ({
     );
   }, [completedWorkouts, isLoaded]);
 
+  // Toast notification
   const showToast = (message: string) => {
     setToastMessage(message);
 
@@ -99,6 +108,7 @@ export const PlanProvider = ({
     }, 2500);
   };
 
+  // Add workout to today's plan
   const addToPlan = (workout: IData) => {
     setTodayPlan((previous) => {
       const alreadyExists = previous.some(
@@ -106,21 +116,30 @@ export const PlanProvider = ({
       );
 
       if (alreadyExists) {
-        showToast("Workout is already in today's plan");
         return previous;
       }
 
       if (previous.length >= 5) {
-        showToast("Today's plan can contain only 5 workouts");
         return previous;
       }
 
-      showToast("Added to today's plan");
-
       return [...previous, workout];
     });
+
+    if (todayPlan.some((item) => item.id === workout.id)) {
+      showToast("Workout is already in today's plan");
+      return;
+    }
+
+    if (todayPlan.length >= 5) {
+      showToast("Today's plan can contain only 5 workouts");
+      return;
+    }
+
+    showToast("Added to today's plan");
   };
 
+  // Remove workout from today's plan
   const removeFromPlan = (id: number) => {
     setTodayPlan((previous) =>
       previous.filter((item) => item.id !== id)
@@ -133,23 +152,19 @@ export const PlanProvider = ({
     showToast("Workout removed from today's plan");
   };
 
+  // Save workout for later
   const saveForLater = (workout: IData) => {
-    setSavedWorkouts((previous) => {
-      const alreadyExists = previous.some(
-        (item) => item.id === workout.id
-      );
+    if (savedWorkouts.some((item) => item.id === workout.id)) {
+      showToast("Workout is already saved");
+      return;
+    }
 
-      if (alreadyExists) {
-        showToast("Workout is already saved");
-        return previous;
-      }
+    setSavedWorkouts((previous) => [...previous, workout]);
 
-      showToast("Saved for later");
-
-      return [...previous, workout];
-    });
+    showToast("Saved for later");
   };
 
+  // Remove saved workout
   const removeSavedWorkout = (id: number) => {
     setSavedWorkouts((previous) =>
       previous.filter((item) => item.id !== id)
@@ -158,15 +173,13 @@ export const PlanProvider = ({
     showToast("Saved workout removed");
   };
 
-  // Mark workout as done
+  // Mark workout as completed
   const markAsDone = (id: number) => {
-    setCompletedWorkouts((previous) => {
-      if (previous.includes(id)) {
-        return previous;
-      }
+    if (completedWorkouts.includes(id)) {
+      return;
+    }
 
-      return [...previous, id];
-    });
+    setCompletedWorkouts((previous) => [...previous, id]);
 
     showToast("Workout marked as done");
   };

@@ -113,7 +113,7 @@ const MyPlan = () => {
                   ? "bg-[#ccff00] text-black"
                   : "border border-gray-700 text-gray-400 hover:border-[#ccff00] hover:text-[#ccff00]"
               }`}>
-              Today's Plan
+              Todays Plan
               <span className="ml-2">
                 ({todayPlan.length})
               </span>
@@ -318,7 +318,7 @@ const MyPlan = () => {
 
             ) : (
               <div className="grid gap-5 md:grid-cols-2">
-                {currentWorkouts.map((workout) => (
+                {savedWorkouts.map((workout) => (
                   <div
                     key={workout.id}
                     className="overflow-hidden rounded-2xl border border-gray-800 bg-[#15171d]"

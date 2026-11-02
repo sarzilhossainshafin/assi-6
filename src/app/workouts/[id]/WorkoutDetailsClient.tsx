@@ -25,7 +25,7 @@ const WorkoutDetailsClient = ({
     <main className="min-h-screen bg-[#0b0d12] px-4 py-10 text-white">
       <div className="container mx-auto grid max-w-6xl gap-8 lg:grid-cols-2">
 
-        {/* LEFT SIDE */}
+        
         <div className="overflow-hidden rounded-2xl border border-gray-800 bg-[#15171d]">
           <Image
             src={workout.image}
@@ -36,7 +36,7 @@ const WorkoutDetailsClient = ({
           />
         </div>
 
-        {/* RIGHT SIDE */}
+  
         <div>
           <h1 className="text-3xl font-black uppercase md:text-5xl">
             {workout.name}
@@ -46,7 +46,7 @@ const WorkoutDetailsClient = ({
             {workout.description}
           </p>
 
-          {/* Muscle Groups */}
+          
           <div className="mt-5 flex flex-wrap gap-2">
             {workout.muscleGroups.map((muscle) => (
               <span
@@ -58,7 +58,7 @@ const WorkoutDetailsClient = ({
             ))}
           </div>
 
-          {/* KEY SPECS */}
+          
           <div className="mt-8 rounded-xl border border-gray-800 bg-[#15171d] p-5">
             <h2 className="mb-4 text-sm font-black uppercase tracking-wider text-[#ccff00]">
               KEY SPECS
@@ -123,13 +123,13 @@ const WorkoutDetailsClient = ({
             </ol>
           </div>
 
-          {/* ACTION BUTTONS */}
+          
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <button
               onClick={handleAddToPlan}
               className="flex flex-1 items-center justify-center gap-2 rounded-full bg-[#ccff00] px-5 py-3 font-bold text-black transition hover:bg-[#b8e600]"
             >
-              ＋ Add to today's plan
+              ＋ Add to todays plan
             </button>
 
             <button
@@ -144,10 +144,6 @@ const WorkoutDetailsClient = ({
     </main>
   );
 };
-
-/* ========================= */
-/* SPEC ROW */
-/* ========================= */
 
 const SpecRow = ({
   label,
